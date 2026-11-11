@@ -55,3 +55,11 @@ curl -s http://localhost:8080/metrics | head        # Prometheus-format metrics
 2. **Structured logging** — make logs valid one-line JSON so
    `grep '"level":"error"'` isolates the planted error line.
 3. **Monitoring signal** — make the Prometheus app target read **UP**.
+
+## Prerequisites and boundaries
+
+Git, running Docker Engine with Compose v2, curl and internet access for images/npm dependencies. Reserve host ports 8080, 9090 and 3000. Commands run from repository root; Bash is needed for supplied traffic loops/scripts. No host Node.js installation, cloud account, billing or real credentials needed. Local monitoring interfaces are exercise-only; do not expose them on a public network. Repair only documented health, logging and monitoring faults; preserve existing service routes, controlled failures and metric semantics. Do not disable checks or fabricate log/metric output.
+
+Wait for listeners, health probes and initial scrapes before interpreting results. After application/image changes run `docker compose up -d --build`; after mounted Prometheus/rule changes run `docker compose restart prometheus`. Local stack status does not prove notification delivery or production readiness.
+
+Cleanup only exercise resources: `docker compose down`.
